@@ -182,8 +182,6 @@ public:
 	void		Release();
 	void		SetDestination( __unaligned LPCVOID pvDestination );
 	__unaligned LPCVOID	GetDestination() const;
-	typedef AsmOperandInstruction<cbOpCodes,Ofs,Op>::_TInstruction _TInstruction;
-	typedef AsmOperandInstruction<cbOpCodes,Ofs,Op>::_TOperands _TOperands;
 };
 
 

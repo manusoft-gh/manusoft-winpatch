@@ -16,10 +16,14 @@
 #define DLLEXPORT
 #endif
 
-#if (_MSC_VER >= 1600)
-#define THROW_SPEC throw(...)
+// Dynamic exception specs (throw(...)) are only valid through C++14 (MSVC C5040
+// under /std:c++17). throw(...) meant "may throw"; C++17 equivalent is noexcept(false).
+#if defined(__cpp_noexcept_function_type) || (defined(_MSVC_LANG) && _MSVC_LANG >= 201703L) || (__cplusplus >= 201703L)
+#  define THROW_SPEC noexcept(false)
+#elif defined(_MSC_VER) && (_MSC_VER >= 1600)
+#  define THROW_SPEC throw(...)
 #else
-#define THROW_SPEC
+#  define THROW_SPEC
 #endif
 
 
